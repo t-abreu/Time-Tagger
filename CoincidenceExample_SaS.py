@@ -120,7 +120,7 @@ class CoincidenceExample(QMainWindow):
         # Set the input delay, trigger level, and test signal of both channels
         # channels = [self.ui.channelA.value(), self.ui.channelB.value(),self.ui.channelC.value(), self.ui.channelD.value()]
         channels = tagger.getChannelList(ChannelEdge.Rising)[:16]
-        print(channels)
+        # print(channels)
         self.tagger.setInputDelay(channels[0], self.ui.delayA.value())
         self.tagger.setInputDelay(channels[1], self.ui.delayB.value())
         self.tagger.setInputDelay(channels[2], self.ui.delayC.value())
@@ -156,6 +156,12 @@ class CoincidenceExample(QMainWindow):
                 binwidth=int(50e9),
                 n_values=200
             )
+
+            # self.counter = Countrate(
+            #     self.tagger,
+            #     channels + tuple(self.coincidences.getChannels())
+            # )
+            # print(self.counter)
 
         # # Measure the correlation between A and B
         # if  self.ui.testsignalA.isChecked() is TRUE:
@@ -204,8 +210,6 @@ class CoincidenceExample(QMainWindow):
         self.counterAxis.grid(True)
 
         self.correlationAxis.clear()
-        # index = self.correlation.getIndex()
-        # data = self.correlation.getDataNormalized()
         index = self.correlation.getIndex()
         data = self.correlation.getDataNormalized()
         self.plt_correlation = self.correlationAxis.plot(
